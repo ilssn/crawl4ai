@@ -37,7 +37,7 @@ class Crawl4AiTester:
             if status["status"] == "completed":
                 return status
 
-            time.sleep(2)
+            time.sleep(5)
 
 
 def test_docker_deployment(version="basic"):
@@ -67,9 +67,9 @@ def test_docker_deployment(version="basic"):
     # test_js_execution(tester)
     # test_css_selector(tester)
     # test_structured_extraction(tester)
-    test_llm_extraction(tester)
+    # test_llm_extraction(tester)
     # test_llm_with_ollama(tester)
-    # test_screenshot(tester)
+    test_screenshot(tester)
 
 
 def test_basic_crawl(tester: Crawl4AiTester):
@@ -275,13 +275,17 @@ def test_cosine_extraction(tester: Crawl4AiTester):
 def test_screenshot(tester: Crawl4AiTester):
     print("\n=== Testing Screenshot ===")
     request = {
-        "urls": "https://www.nbcnews.com/business",
-        "priority": 5,
+        "urls": "https://news.302.ai/?p=6230",
+        # "priority": 5,
         "screenshot": True,
-        "crawler_params": {"headless": True},
+        # "cache_mode": "BYPASS",
+        "pdf": True,
+        # "scan_full_page": False,
+        # "crawler_params": {"headless": True},
     }
 
     result = tester.submit_and_wait(request)
+    # print(result["result"])
     print("Screenshot captured:", bool(result["result"]["screenshot"]))
 
     if result["result"]["screenshot"]:
