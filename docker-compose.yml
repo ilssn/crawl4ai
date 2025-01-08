@@ -8,8 +8,8 @@ services:
       dockerfile: Dockerfile
       args:
         PYTHON_VERSION: "3.10"
-        INSTALL_TYPE: ${INSTALL_TYPE:-basic}
-        ENABLE_GPU: false
+        INSTALL_TYPE: "${INSTALL_TYPE:-basic}"
+        ENABLE_GPU: "${ENABLE_GPU:-false}"
       platforms:
         - linux/amd64
     profiles: ["local-amd64"]
@@ -44,8 +44,8 @@ services:
       dockerfile: Dockerfile
       args:
         PYTHON_VERSION: "3.10"
-        INSTALL_TYPE: ${INSTALL_TYPE:-basic}
-        ENABLE_GPU: false
+        INSTALL_TYPE: "${INSTALL_TYPE:-basic}"
+        ENABLE_GPU: "${ENABLE_GPU:-false}"
       platforms:
         - linux/arm64
     profiles: ["local-arm64"]
