@@ -10,8 +10,6 @@ services:
         PYTHON_VERSION: "3.10"
         INSTALL_TYPE: "${INSTALL_TYPE:-basic}"
         ENABLE_GPU: "${ENABLE_GPU:-false}"
-      platforms:
-        - linux/amd64
     profiles: ["local-amd64"]
     ports:
       - "11235:11235"
@@ -46,8 +44,6 @@ services:
         PYTHON_VERSION: "3.10"
         INSTALL_TYPE: "${INSTALL_TYPE:-basic}"
         ENABLE_GPU: "${ENABLE_GPU:-false}"
-      platforms:
-        - linux/arm64
     profiles: ["local-arm64"]
     ports:
       - "11235:11235"
