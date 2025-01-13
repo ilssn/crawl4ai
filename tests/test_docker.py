@@ -74,9 +74,13 @@ def test_docker_deployment(version="basic"):
 
 def test_basic_crawl(tester: Crawl4AiTester):
     print("\n=== Testing Basic Crawl ===")
-    request = {"urls": "https://www.nbcnews.com/business", "priority": 10}
+    request = {"urls": "https://affmaven.com/proxy302-review/", "priority": 10}
 
     result = tester.submit_and_wait(request)
+    with open("crawl_result.md", "w", encoding="utf-8") as file:
+        file.write(result["result"]["markdown"])
+    with open("cleaned_html.html", "w", encoding="utf-8") as file:
+        file.write(result["result"]["cleaned_html"])
     print(f"Basic crawl result length: {len(result['result']['markdown'])}")
     assert result["result"]["success"]
     assert len(result["result"]["markdown"]) > 0
@@ -278,8 +282,8 @@ def test_screenshot(tester: Crawl4AiTester):
         "urls": "https://news.302.ai/?p=6230",
         # "priority": 5,
         "screenshot": True,
-        # "cache_mode": "BYPASS",
-        "pdf": True,
+        "cache_mode": "disabled",
+        # "pdf": True,
         # "scan_full_page": False,
         # "crawler_params": {"headless": True},
     }
