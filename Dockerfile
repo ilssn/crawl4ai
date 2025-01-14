@@ -45,6 +45,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2 \
     libasound2 \
     libatspi2.0-0 \
+    locales \
+    fonts-noto-cjk \
     && rm -rf /var/lib/apt/lists/*
 
 # Create and set working directory
@@ -62,6 +64,16 @@ RUN pip install fastapi uvicorn psutil
 # Install Playwright and its browsers
 RUN pip install playwright && \
     python -m playwright install
+
+# 安装中文字体和语言包
+RUN apt-get update && \
+    apt-get install -y locales fonts-noto-cjk && \
+    locale-gen zh_CN.UTF-8
+
+# 设置环境变量
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN:zh
+ENV LC_ALL=zh_CN.UTF-8
 
 # Expose port
 EXPOSE 8000 11235 9222 8080
